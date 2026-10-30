@@ -23,8 +23,13 @@ class ConsoleRepository
      * @return array<Console> Retourne le tableau des consoles (Console)
      * @throws \Exception Erreurs SQL
      */
+    
     public function findAllConsoles(): array 
     {
-        return [];
+        $sql = "SELECT id, name, manufacturer FROM console";
+        $stmt = $this->connect->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
